@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'bookadmin'
 ]
 
 MIDDLEWARE = [
@@ -75,8 +77,12 @@ WSGI_APPLICATION = 'djangorest.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'djangorest',
+        'HOST': '39.106.213.213',
+        'PORT': 3306,
+        'PASSWORD': 'hh226752',
+        'USER': 'root'
     }
 }
 
@@ -118,3 +124,12 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        'bookadmin.authtication.Authtication'   # 全局用户认证
+    ],
+    'UNAUTHENTICATED_USER': None,  # 认证匿名用户时，返回None
+    # 'UNAUTHENTICATED_USER': lambda: '匿名用户',  # 认证匿名用户时，返回None
+
+}
