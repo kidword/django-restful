@@ -4,6 +4,9 @@ from .models import BookInfo, HeroInfo, UserInfo
 from rest_framework.parsers import JSONParser, FormParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.generics import GenericAPIView
+from rest_framework.viewsets import GenericViewSet
 
 
 class BookInfoViews(APIView):
@@ -22,7 +25,9 @@ class BookInfoViews(APIView):
 class UserInfoViews(APIView):
     def get(self, request):
         queryset = UserInfo.objects.all()
-        serializer = UserInfoSerializer(queryset, many=True)
+        pg = PageNumberPagination()
+        pagedata = pg.paginate_queryset(queryset=queryset, request=request, view=self)
+        serializer = UserInfoSerializer(pagedata, many=True)
         return Response(serializer.data)
 
     def post(self, request, ):
@@ -38,3 +43,9 @@ class UserGroupView(APIView):
         else:
             print(ser.errors)
         return Response("提交数据")
+
+
+class ViewSet(GenericViewSet):
+
+    def get(self, request):
+        pass

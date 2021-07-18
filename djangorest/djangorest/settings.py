@@ -145,6 +145,8 @@ REST_FRAMEWORK = {
     # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
     # 'DEFAULT_VERSION': 'v1',   # 版本
     # 'ALLOW_VERSIONS': ['v1', 'v2'],  # 允许版本
-    # 'VERSION_PARAM': 'version'
+    # 'VERSION_PARAM': 'version',
+
+    "PAGE_SIZE": 2   # 配置翻页
 
 }
