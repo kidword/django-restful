@@ -127,9 +127,24 @@ STATIC_URL = '/static/'
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        'bookadmin.authtication.Authtication'   # 全局用户认证
+        # 'bookadmin.authtication.Authtication'   # 全局用户认证
     ],
+
     'UNAUTHENTICATED_USER': None,  # 认证匿名用户时，返回None
     # 'UNAUTHENTICATED_USER': lambda: '匿名用户',  # 认证匿名用户时，返回None
+
+    "DEFAULT_PERMISSION_CLASSES": [
+        'bookadmin.permission.MyPermission'  # 权限认证
+    ],
+
+    'DEFAULT_THROTTLE_CLASS': ['bookadmin.throttle.VisitThrottle'],   # 访问频率限制
+    "DEFAULT_THROTTLE_RATES": {
+        "speed": '100/m'
+    },
+
+    # 'DEFAULT_VERSIONING_CLASS': 'rest_framework.versioning.URLPathVersioning',
+    # 'DEFAULT_VERSION': 'v1',   # 版本
+    # 'ALLOW_VERSIONS': ['v1', 'v2'],  # 允许版本
+    # 'VERSION_PARAM': 'version'
 
 }
