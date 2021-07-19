@@ -134,7 +134,7 @@ REST_FRAMEWORK = {
     # 'UNAUTHENTICATED_USER': lambda: '匿名用户',  # 认证匿名用户时，返回None
 
     "DEFAULT_PERMISSION_CLASSES": [
-        'bookadmin.permission.MyPermission'  # 权限认证
+        # 'bookadmin.permission.MyPermission'  # 权限认证
     ],
 
     'DEFAULT_THROTTLE_CLASS': ['bookadmin.throttle.VisitThrottle'],   # 访问频率限制
