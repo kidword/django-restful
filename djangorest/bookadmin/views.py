@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from .serializer import BookSerializers, UserInfoSerializer, UserGroupSerializer
 from .models import BookInfo, HeroInfo, UserInfo
-from rest_framework.parsers import JSONParser, FormParser
+from rest_framework.parsers import JSONParser, FormParser, FileUploadParser, MultiPartParser
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.pagination import PageNumberPagination
@@ -35,13 +35,25 @@ class UserInfoViews(APIView):
 
 
 class UserGroupView(APIView):
+    parser_classes = [MultiPartParser]
+
     def post(self, request, *args, **kwargs):
+        """
+        文件上传
+        file_obj = request.data['file']
+        filename = file_obj._name
+
+        with open(filename, 'wb') as f:
+            for chunk in file_obj.chunks():
+                f.write(chunk)
+        """
         json_data = request.data
         ser = UserGroupSerializer(data=json_data)
         if ser.is_valid():
             print(ser.validated_data)
         else:
             print(ser.errors)
+
         return Response("提交数据")
 
 
